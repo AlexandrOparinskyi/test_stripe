@@ -5,10 +5,11 @@ import stripe
 
 from .models import Items
 
+stripe.api_key = settings.STRIPE_SECRET_KEY
+
 
 def create_checkout_session(request, pk):
     item = Items.objects.get(pk=pk)
-    stripe.api_key = settings.STRIPE_SECRET_KEY
     domain = 'http://127.0.0.1:8000'
     session = stripe.checkout.Session.create(
         mode='payment',
@@ -26,4 +27,13 @@ def create_checkout_session(request, pk):
             'quantity': 1,
         }]
     )
-    return JsonResponse({'id': session['id']})
+    return JsonResponse({'sessionId': session['id']})
+
+
+def config(request):
+    return JsonResponse({'publicKey': settings.STRIPE_PUBLIC_KEY})
+
+
+def index(request, pk):
+    item = Items.objects.get(pk=pk)
+    return render(request, 'index.html', {'item': item})

@@ -1,10 +1,19 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-</head>
-<body>
-
-</body>
+  <head>
+    <meta charset="UTF-8">
+    <title>Buy item</title>
+  </head>
+  <body>
+    <ul>
+      <li>{{ item.name }}</li>
+      <li>{{ item.description }}</li>
+      <li>{{ item.price }}</li>
+    </ul>
+    <button class="btn">Buy</button>
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="{% static 'redirect.js' %}"></script>
+  </body>
 </html>
