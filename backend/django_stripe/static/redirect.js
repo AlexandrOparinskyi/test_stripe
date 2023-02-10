@@ -1,7 +1,7 @@
 fetch('/config/')
     .then(function (result) {return result.json()})
     .then(function (data) {
-        const stripe = Stripe(data.publicKey)
+        let stripe = Stripe(data.publicKey)
         let btn = document.querySelector('.btn')
         if (btn !== null) {
             btn.addEventListener('click', function () {
@@ -19,5 +19,3 @@ fetch('/config/')
             })
         }
     })
-
-

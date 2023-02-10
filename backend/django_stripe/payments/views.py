@@ -14,7 +14,7 @@ def create_checkout_session(request, pk):
     session = stripe.checkout.Session.create(
         mode='payment',
         payment_method_types=['card'],
-        success_url=domain +'/success/',
+        success_url=domain + '/success/',
         cancel_url=domain + '/cancel/',
         line_items=[{
             'price_data': {
@@ -37,3 +37,11 @@ def config(request):
 def index(request, pk):
     item = Items.objects.get(pk=pk)
     return render(request, 'index.html', {'item': item})
+
+
+def success(request):
+    return render(request, 'success.html')
+
+
+def cancel(request):
+    return render(request, 'cancel.html')
